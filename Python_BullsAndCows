@@ -1,0 +1,56 @@
+numbers = []
+
+def generator():
+  
+  for i in range(1234,9877):
+    st = str(i)
+    
+    for j in st:
+      if st.count(j)>1: break
+    
+      if j == "0": break
+      elif j==st[3] and st.count(j) == 1: 
+        numbers.append(i)
+ 
+
+def match(n1,n2):
+  s1 = str(n1)
+  s2 = str(n2)
+  BandC = [0,0]
+  
+  for i in range(len(s1)):
+   for j in range(len(s2)):
+      if s1[i] == s2[j]:
+        if i == j:
+          BandC[0]+=1
+        else:
+          BandC[1]+=1
+  return BandC
+
+
+generator()
+
+
+def delete(num, res):
+
+  for x in numbers:
+    if match(num,x) != res:
+     numbers.remove(x)
+
+
+def gameplay():
+  gameover = False
+  turns = 0
+  while not gameover:
+    guess = numbers[0]
+    turns += 1
+    print ("My guess is: ", guess)
+    bulls = int(input("Number of bulls: "))
+    cows = int(input("Number of cows: "))
+    
+    if bulls == 4:
+      break
+    delete(guess,[bulls,cows])
+  print("Game over! The number is guessed in {0} turns!".format(turns))
+  
+gameplay()
